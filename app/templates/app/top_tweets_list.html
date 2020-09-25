@@ -23,15 +23,16 @@
 
     <table class="ui celled table">
         <thead>
-            <tr><th> Times Posted </th>
+            <tr>
                 <th> Domain Name</th>
+                <th> Times Posted </th>
             </tr>
         </thead>
             <tbody>
                 {% for domain in domains %}
                 <tr>
-                    <td data-label="Times Posted">{{ domain.domain_name}}</td>
-                    <td data-label="Domain Name">{{ domain.total}}</td>
+                    <td data-label="Domain Name">{{ domain.domain_name}}</td>
+                    <td data-label="Times Posted">{{ domain.total}}</td>
                 </tr>
                 {%endfor %}
             </tbody>
