@@ -3,3 +3,5 @@ ttlenv/
 .vscode/
 mydjangoapp/__pycache__/
 db.sqlite3
+app/migrations/__pycache__/
+app/__pycache__/
