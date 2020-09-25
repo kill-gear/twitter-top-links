@@ -40,12 +40,13 @@ def top_tweets_list(request):
 
 def user_tweets_list(request):
     # post = get_object_or_404(Post, pk=pk)
-    if request.session.get('is_logged_in'):
-        tweets =  Tweet.objects.filter(user_id=request.session['user_id'])
+    if request.session.get('user_id'):
+        tweets =  Tweet.objects.filter(user_id=request.session.get('user_id', -1))
         return render(request, 'app/user_tweets_list.html', {'tweets':tweets})
     
-    response = HttpResponseRedirect('/')
-    return response
+    else:
+        response = HttpResponseRedirect('/')
+        return response
 
 
 
@@ -77,20 +78,24 @@ def callback(request):
         # get the access token and store
         try:
             oauth.get_access_token(verifier)
+            # fetch tweets from user timeline 
+            tweets_data, user_id = fetch_tweets(oauth)
+    
+            for tweet, domain in tweets_data:
+                Tweet.objects.get_or_create(**tweet)
+                Domain.objects.get_or_create(**domain)
+            
+            request.session['user_id'] = user_id
+        
         except tweepy.TweepError:
             print('Error, failed to get access token')
         
-        # fetch tweets from user timeline 
-        tweets_data, user_id = fetch_tweets(oauth)
+        except Exception as e:
+            print(e)
+
         
-    for tweet, domain in tweets_data:
-        Tweet.objects.get_or_create(**tweet)
-        Domain.objects.get_or_create(**domain)
     
     response = HttpResponseRedirect('/')
-    print("Hello World", response)
-    request.session['is_logged_in'] = True
-    request.session['user_id'] = user_id
     return response
 
 def sign_out(request):
