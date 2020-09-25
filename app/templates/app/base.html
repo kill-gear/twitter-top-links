@@ -1,0 +1,67 @@
+{% load static %}
+<html>
+    <head>
+        <title>Django blog</title>
+        <!-- <link rel='stylesheet' href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
+        <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
+        <!-- <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css"> -->
+        <!-- <link rel="stylesheet" href="{% static 'css/blog.css' %}"> -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    </head>
+    <body><div class="ui secondary pointing menu">
+        <h2 class="ui center aligned icon header">
+            <i class="circular users icon"></i>
+            Twitter Top Links 
+          </h2>
+          
+        <a href={% url 'top_tweets_list' %} class="item">
+          Home
+        </a>
+        <a href={% url 'user_tweets_list' %} class="item">
+          Tweets
+        </a>
+        <div class="right menu">
+            <a href = {% url 'auth' %} class="ui item">
+            <i class="twitter icon"></i>
+            Login with Twitter
+          </a>
+          
+          <a href = {% url 'sign_out' %} class="ui item">
+            <i class="trash icon"></i>
+            Sign Out
+          </a>
+        </div>
+      </div>
+      <!-- <div class="ui segment">
+        <p></p>
+      </div>
+        <div class="page-header">
+            <h1><a href="/">Django Blog</a></h1>
+        </div>
+        <div class="ui container">
+            <div class="ui basic segment"></div>
+            <h1 class="ui header"><a href="/index">Home</a></h1>
+            <hr>
+        </div>
+        <div id="container">
+            <h2>Welcome!</h2>
+            <p>Sign in with Twitter to begin.</p>
+            <p><a href="/post/auth/"><img src="https://g.twimg.com/dev/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" alt="sign in with twitter" /></a></p>
+        </div> -->
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous">
+        </script>
+        <!-- <script src="semantic/dist/semantic.min.js"></script> -->
+    </body>
+</html>
