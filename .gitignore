@@ -1,2 +1,5 @@
 config.py
 ttlenv/
+.vscode/
+mydjangoapp/__pycache__/
+db.sqlite3
